@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -79,15 +79,18 @@
 
 
 
-<meta name="keywords" content="iOS、JavaScript">
+<meta name="description" content="第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Mess">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HelloEveryone">
-<meta property="og:url" content="http://yoursite.com/2018/11/15/HelloEveryone/index.html">
+<meta property="og:title" content="编写高质量Objective-C代码（一）">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/编写高质量Objective-C代码（一）/index.html">
 <meta property="og:site_name" content="Funny的小笔记">
+<meta property="og:description" content="第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Mess">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-15T06:30:35.139Z">
+<meta property="og:updated_time" content="2018-11-19T09:16:33.684Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HelloEveryone">
+<meta name="twitter:title" content="编写高质量Objective-C代码（一）">
+<meta name="twitter:description" content="第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Mess">
 
 
 
@@ -117,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/15/HelloEveryone/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/19/编写高质量Objective-C代码（一）/">
 
 
 
 
 
-  <title>HelloEveryone | Funny的小笔记</title>
+  <title>编写高质量Objective-C代码（一） | Funny的小笔记</title>
   
 
 
@@ -230,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/15/HelloEveryone/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/编写高质量Objective-C代码（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Funny">
@@ -247,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HelloEveryone</h1>
+          <h1 class="post-title" itemprop="name headline">编写高质量Objective-C代码（一）</h1>
         
 
         <div class="post-meta">
@@ -259,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T14:30:35+08:00">
-                2018-11-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T16:31:19+08:00">
+                2018-11-19
               </time>
             
 
@@ -302,7 +305,10 @@
       
 
       
-        
+        <h2 id="第1条-了解Objective-C语言的起源"><a href="#第1条-了解Objective-C语言的起源" class="headerlink" title="第1条:了解Objective-C语言的起源"></a>第1条:了解Objective-C语言的起源</h2><p>Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Messaging(Objective-C)</span></span><br><span class="line">Object *obj = [Object new];</span><br><span class="line">[obj performWith:parameter1 and:parameter2];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Function calling(C++)</span></span><br><span class="line">Object *obj = new Object;</span><br><span class="line">obj-&gt;perform(parameter1, parameter2);</span><br></pre></td></tr></table></figure>
+<p>分配在堆中的内存必须直接管理，而分配的栈上的用于保存变量的内存则会在其栈帧弹出时自动清理。Objective-C将堆内存管理抽象出来，不需要用malloc及free来分配或释放对象所占内存。它在运行期环境把这部分工作抽象为一套内存管理架构，叫做“引用计数”。</p>
+<h2 id="第2条：在类的头文件中尽量少引入其他头文件"><a href="#第2条：在类的头文件中尽量少引入其他头文件" class="headerlink" title="第2条：在类的头文件中尽量少引入其他头文件"></a>第2条：在类的头文件中尽量少引入其他头文件</h2>
       
     </div>
     
@@ -317,6 +323,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
 
       
       
@@ -326,8 +338,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/15/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/11/15/HelloEveryone/" rel="next" title="HelloEveryone">
+                <i class="fa fa-chevron-left"></i> HelloEveryone
               </a>
             
           </div>
@@ -335,10 +347,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/19/编写高质量Objective-C代码（一）/" rel="prev" title="编写高质量Objective-C代码（一）">
-                编写高质量Objective-C代码（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -390,8 +398,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -444,6 +461,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1条-了解Objective-C语言的起源"><span class="nav-text">第1条:了解Objective-C语言的起源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2条：在类的头文件中尽量少引入其他头文件"><span class="nav-text">第2条：在类的头文件中尽量少引入其他头文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
