@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="GCD,">
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta name="keywords" content="iOS、JavaScript">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Funny的小笔记">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
+<meta name="keywords" content="GCD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程总结">
+<meta property="og:url" content="http://yoursite.com/2018/12/02/多线程总结/index.html">
 <meta property="og:site_name" content="Funny的小笔记">
+<meta property="og:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-02T13:11:04.237Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Funny的小笔记">
+<meta name="twitter:title" content="多线程总结">
+<meta name="twitter:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/02/多线程总结/">
 
 
 
 
 
-  <title>Funny的小笔记</title>
+  <title>多线程总结 | Funny的小笔记</title>
   
 
 
@@ -141,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -215,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -247,9 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/02/多线程总结/" itemprop="url">多线程总结</a></h1>
+          <h1 class="post-title" itemprop="name headline">多线程总结</h1>
         
 
         <div class="post-meta">
@@ -283,6 +284,9 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
 
           
 
@@ -301,9 +305,7 @@
       
 
       
-        
-          
-            <h3 id="1、首先了解什么是线程和进程"><a href="#1、首先了解什么是线程和进程" class="headerlink" title="1、首先了解什么是线程和进程"></a>1、首先了解什么是线程和进程</h3><ul>
+        <h3 id="1、首先了解什么是线程和进程"><a href="#1、首先了解什么是线程和进程" class="headerlink" title="1、首先了解什么是线程和进程"></a>1、首先了解什么是线程和进程</h3><ul>
 <li><strong>进程：</strong> 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。</li>
 <li><strong>线程：</strong> 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。</li>
 <li><strong>多线程：</strong> 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。<blockquote>
@@ -405,8 +407,6 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
 </code></pre></li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -421,259 +421,36 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/编写高质量Objective-C代码（一）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Funny">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Funny的小笔记">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/19/编写高质量Objective-C代码（一）/" itemprop="url">编写高质量Objective-C代码（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T16:31:19+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/GCD/" rel="tag"># GCD</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="第1条-了解Objective-C语言的起源"><a href="#第1条-了解Objective-C语言的起源" class="headerlink" title="第1条:了解Objective-C语言的起源"></a>第1条:了解Objective-C语言的起源</h2><p>Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Messaging(Objective-C)</span></span><br><span class="line">Object *obj = [Object new];</span><br><span class="line">[obj performWith:parameter1 and:parameter2];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Function calling(C++)</span></span><br><span class="line">Object *obj = new Object;</span><br><span class="line">obj-&gt;perform(parameter1, parameter2);</span><br></pre></td></tr></table></figure>
-<p>分配在堆中的内存必须直接管理，而分配的栈上的用于保存变量的内存则会在其栈帧弹出时自动清理。Objective-C将堆内存管理抽象出来，不需要用malloc及free来分配或释放对象所占内存。它在运行期环境把这部分工作抽象为一套内存管理架构，叫做“引用计数”。</p>
-<h2 id="第2条：在类的头文件中尽量少引入其他头文件"><a href="#第2条：在类的头文件中尽量少引入其他头文件" class="headerlink" title="第2条：在类的头文件中尽量少引入其他头文件"></a>第2条：在类的头文件中尽量少引入其他头文件</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/15/HelloEveryone/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Funny">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Funny的小笔记">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/15/HelloEveryone/" itemprop="url">HelloEveryone</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T14:30:35+08:00">
-                2018-11-15
-              </time>
+              <a href="/2018/11/19/编写高质量Objective-C代码（一）/" rel="next" title="编写高质量Objective-C代码（一）">
+                <i class="fa fa-chevron-left"></i> 编写高质量Objective-C代码（一）
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -683,10 +460,11 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -694,6 +472,10 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
 
 
           
+
+  
+
+
 
         </div>
         
@@ -714,8 +496,17 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -768,6 +559,22 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、首先了解什么是线程和进程"><span class="nav-text">1、首先了解什么是线程和进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、GCD任务和队列"><span class="nav-text">2、GCD任务和队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、GCD的基本使用"><span class="nav-text">3、GCD的基本使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -919,6 +726,10 @@ end-----&lt;NSThread: 0x600002856900&gt;{number = 1, name = main}
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
