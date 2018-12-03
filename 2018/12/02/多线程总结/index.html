@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Funny的小笔记">
 <meta property="og:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-02T14:12:35.915Z">
+<meta property="og:updated_time" content="2018-12-03T15:21:46.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程总结">
 <meta name="twitter:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
@@ -424,6 +424,52 @@ end-----&lt;NSThread: 0x6000016de940&gt;{number = 1, name = main}
 222 + &lt;NSThread: 0x60000168e7c0&gt;{number = 4, name = (null)}---1
 333 + &lt;NSThread: 0x60000168bac0&gt;{number = 5, name = (null)}---1
 </code></pre></li>
+<li><p><strong>7、栅栏函数</strong></p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：栅栏函数的队列不能是全局队列dispatch_get_global_queue(0, 0)</span></span><br><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_queue_create(<span class="string">"test"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"333-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"栅栏函数-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"444-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>111-----&lt;NSThread: 0x604000278c40&gt;{number = 3, name = (null)}
+333-----&lt;NSThread: 0x604000278b80&gt;{number = 5, name = (null)}
+222-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
+111-----&lt;NSThread: 0x604000278c40&gt;{number = 3, name = (null)}
+333-----&lt;NSThread: 0x604000278b80&gt;{number = 5, name = (null)}
+222-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
+栅栏函数-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
+栅栏函数-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
+444-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
+444-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
+</code></pre></li>
+<li><p><strong>8、GCD任务组</strong></p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"333-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"end-----任务组中的任务全部执行完毕"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>222-----&lt;NSThread: 0x604000471b80&gt;{number = 4, name = (null)}
+333-----&lt;NSThread: 0x60000027a0c0&gt;{number = 5, name = (null)}
+111-----&lt;NSThread: 0x604000471c40&gt;{number = 3, name = (null)}
+222-----&lt;NSThread: 0x604000471b80&gt;{number = 4, name = (null)}
+333-----&lt;NSThread: 0x60000027a0c0&gt;{number = 5, name = (null)}
+111-----&lt;NSThread: 0x604000471c40&gt;{number = 3, name = (null)}
+end-----任务组中的任务全部执行完毕
+</code></pre></li>
+<li><p><strong>9、GCD快速迭代</strong></p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-------start-------"</span>);</span><br><span class="line"><span class="comment">// 三个参数分别表示：循环次数   执行任务的队列   索引</span></span><br><span class="line">dispatch_apply(<span class="number">10</span>, dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^(size_t index) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld --- %@"</span>, index, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-------end-------"</span>);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>-------start-------
+0 --- &lt;NSThread: 0x6040000680c0&gt;{number = 1, name = main}
+2 --- &lt;NSThread: 0x6040000680c0&gt;{number = 1, name = main}
+1 --- &lt;NSThread: 0x604000268400&gt;{number = 3, name = (null)}
+3 --- &lt;NSThread: 0x6040000680c0&gt;{number = 1, name = main}
+5 --- &lt;NSThread: 0x6040000680c0&gt;{number = 1, name = main}
+4 --- &lt;NSThread: 0x6000002766c0&gt;{number = 4, name = (null)}
+-------end-------
+</code></pre></li>
+<li><p><strong>10、GCD延时执行</strong></p>
+<p>  dispatch_after函数并不是在指定时间之后立即执行处理，而是在指定时间之后将任务<strong>追加</strong>到指定的队列中。严格来说，这个时间并不是绝对准确的。</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-------start-------"</span>);</span><br><span class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">1.0</span> * <span class="built_in">NSEC_PER_SEC</span>)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"111-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">2.0</span> * <span class="built_in">NSEC_PER_SEC</span>)), dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"222-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-------end-------"</span>);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>-------start-------
+-------end-------
+111-----&lt;NSThread: 0x604000077bc0&gt;{number = 1, name = main}
+222-----&lt;NSThread: 0x60400026eb00&gt;{number = 3, name = (null)}
+</code></pre></li>
 </ul>
 
       
@@ -542,7 +588,7 @@ end-----&lt;NSThread: 0x6000016de940&gt;{number = 1, name = main}
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
