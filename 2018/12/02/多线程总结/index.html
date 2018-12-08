@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Funny的小笔记">
 <meta property="og:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-03T15:21:46.926Z">
+<meta property="og:updated_time" content="2018-12-08T09:24:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程总结">
 <meta name="twitter:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
@@ -327,15 +327,12 @@
 </li>
 </ul>
 <ul>
-<li><p><strong>队列：</strong> 这里的队列指执行任务的等待队列，即用来存放任务的队列。队列是一种线性表，采用FIFO（先进先出）的原则。GCD中有两种队列：串行队列和并发队列。</p>
-<blockquote>
+<li><strong>队列：</strong> 这里的队列指执行任务的等待队列，即用来存放任务的队列。队列是一种线性表，采用FIFO（先进先出）的原则。GCD中有两种队列：串行队列和并发队列。<blockquote>
 <ul>
 <li>串行队列(Serial DIspatch Queue):<br>每次只有一个任务被执行。让任务一个接一个的执行。（只开启一个线程，一个任务执行完毕后，再执行下一个任务）</li>
 <li>并发队列(Concurrent Dispatch Queue):<br>可以让多个任务并发执行。（可以开启多个线程，并同时执行任务）<br><strong>注意：</strong> 并发队列的并发功能只有在异步函数下才有效。</li>
 </ul>
 </blockquote>
-</li>
-<li><p><strong>示例：</strong> </p>
 </li>
 </ul>
 <h3 id="3、GCD的基本使用"><a href="#3、GCD的基本使用" class="headerlink" title="3、GCD的基本使用"></a>3、GCD的基本使用</h3><ul>
