@@ -82,14 +82,14 @@
 <meta name="description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 <meta name="keywords" content="GCD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多线程总结">
-<meta property="og:url" content="http://yoursite.com/2018/12/02/多线程总结/index.html">
+<meta property="og:title" content="多线程总结（一）">
+<meta property="og:url" content="http://yoursite.com/2018/12/02/多线程总结（一）/index.html">
 <meta property="og:site_name" content="Funny的小笔记">
 <meta property="og:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-08T09:24:14.000Z">
+<meta property="og:updated_time" content="2018-12-09T04:18:34.538Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多线程总结">
+<meta name="twitter:title" content="多线程总结（一）">
 <meta name="twitter:description" content="1、首先了解什么是线程和进程 进程： 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。 线程： 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。 多线程： 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。  多线程原理： 同一时间，CPU只能处理1条线程任务">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/02/多线程总结/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/02/多线程总结（一）/">
 
 
 
 
 
-  <title>多线程总结 | Funny的小笔记</title>
+  <title>多线程总结（一） | Funny的小笔记</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/多线程总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/多线程总结（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Funny">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">多线程总结</h1>
+          <h1 class="post-title" itemprop="name headline">多线程总结（一）</h1>
         
 
         <div class="post-meta">
@@ -305,7 +305,7 @@
       
 
       
-        <h3 id="1、首先了解什么是线程和进程"><a href="#1、首先了解什么是线程和进程" class="headerlink" title="1、首先了解什么是线程和进程"></a>1、首先了解什么是线程和进程</h3><ul>
+        <h2 id="1、首先了解什么是线程和进程"><a href="#1、首先了解什么是线程和进程" class="headerlink" title="1、首先了解什么是线程和进程"></a>1、首先了解什么是线程和进程</h2><ul>
 <li><strong>进程：</strong> 系统中正在运行的一个应用程序，每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。</li>
 <li><strong>线程：</strong> 一个线程要想执行任务，必须得有进程，每个进程至少要有1条线程。线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。</li>
 <li><strong>多线程：</strong> 1个进程中可以开启多条线程，多条线程可以并行（同时）执行不同的任务。<blockquote>
@@ -317,7 +317,7 @@
 </li>
 </ul>
 <a id="more"></a>
-<h3 id="2、GCD任务和队列"><a href="#2、GCD任务和队列" class="headerlink" title="2、GCD任务和队列"></a>2、GCD任务和队列</h3><ul>
+<h2 id="2、GCD任务和队列"><a href="#2、GCD任务和队列" class="headerlink" title="2、GCD任务和队列"></a>2、GCD任务和队列</h2><ul>
 <li><strong>任务：</strong> 就是需要执行的代码块。任务执行有两种方式：<strong>同步和异步</strong>。两者的主要区别是：<strong>是否等待队列的任务执行结束，以及是否具备开启新线程的能力</strong>。<blockquote>
 <ul>
 <li>同步执行(sync)：<br>  同步添加任务到指定的队列中，在添加的任务执行结束之前，会一直等待，直到队列里面的任务完成之后在继续执行。只能在当前线程中执行，不具备开启新线程的能力。</li>
@@ -335,7 +335,7 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="3、GCD的基本使用"><a href="#3、GCD的基本使用" class="headerlink" title="3、GCD的基本使用"></a>3、GCD的基本使用</h3><ul>
+<h2 id="3、GCD的基本使用"><a href="#3、GCD的基本使用" class="headerlink" title="3、GCD的基本使用"></a>3、GCD的基本使用</h2><ul>
 <li><p><strong>1、主队列+同步函数</strong></p>
 <blockquote>
 <ul>
@@ -436,15 +436,46 @@ end-----&lt;NSThread: 0x6000016de940&gt;{number = 1, name = main}
 444-----&lt;NSThread: 0x600000467400&gt;{number = 4, name = (null)}
 </code></pre></li>
 <li><p><strong>8、GCD任务组</strong></p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"333-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"end-----任务组中的任务全部执行完毕"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>dispatch_group_notify不会阻塞当前线程</strong></li>
+</ul>
+</blockquote>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111---%@---%d"</span>, [<span class="built_in">NSThread</span> currentThread], i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222---%@---%d"</span>, [<span class="built_in">NSThread</span> currentThread], i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"end-----任务组中的任务全部执行完毕"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-----end-----"</span>);</span><br></pre></td></tr></table></figure>
 <p>  输出结果：</p>
-<pre><code>222-----&lt;NSThread: 0x604000471b80&gt;{number = 4, name = (null)}
-333-----&lt;NSThread: 0x60000027a0c0&gt;{number = 5, name = (null)}
-111-----&lt;NSThread: 0x604000471c40&gt;{number = 3, name = (null)}
-222-----&lt;NSThread: 0x604000471b80&gt;{number = 4, name = (null)}
-333-----&lt;NSThread: 0x60000027a0c0&gt;{number = 5, name = (null)}
-111-----&lt;NSThread: 0x604000471c40&gt;{number = 3, name = (null)}
+<pre><code>-----end-----
+222---&lt;NSThread: 0x604000471b80&gt;{number = 4, name = (null)}---0
+111---&lt;NSThread: 0x604000471c40&gt;{number = 3, name = (null)}---0
+222---&lt;NSThread: 0x604000471b80&gt;{number = 4, name = (null)}---1
+111---&lt;NSThread: 0x604000471c40&gt;{number = 3, name = (null)}---1
 end-----任务组中的任务全部执行完毕
+</code></pre><blockquote>
+<ul>
+<li><strong>dispatch_group_wait(group, DISPATCH_TIME_FOREVER)阻塞当前线程</strong></li>
+</ul>
+</blockquote>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111---%@---%d"</span>, [<span class="built_in">NSThread</span> currentThread], i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222---%@---%d"</span>, [<span class="built_in">NSThread</span> currentThread], i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_wait(group, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-----end-----"</span>);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>222---&lt;NSThread: 0x600000de6240&gt;{number = 4, name = (null)}---0
+111---&lt;NSThread: 0x600000de35c0&gt;{number = 3, name = (null)}---0
+222---&lt;NSThread: 0x600000de6240&gt;{number = 4, name = (null)}---1
+111---&lt;NSThread: 0x600000de35c0&gt;{number = 3, name = (null)}---1
+-----end-----
+</code></pre><blockquote>
+<ul>
+<li><strong>dispatch_group_enter和dispatch_group_leave</strong></li>
+</ul>
+</blockquote>
+<p>  dispatch_group_enter标志着一个任务追加到group，group中的未完成任务数+1；<br>  dispatch_group_leave标志着一个任务离开group，group中的未完成任务数-1；<br>  当group中未完毕任务数为0时，才会使dispatch_group_wait解除阻塞，以及执行追加到dispatch_group_notify中的任务。</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line">dispatch_group_enter(group);</span><br><span class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111---%@---%d"</span>, [<span class="built_in">NSThread</span> currentThread], i);</span><br><span class="line">    &#125;</span><br><span class="line">    dispatch_group_leave(group);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_enter(group);</span><br><span class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222---%@---%d"</span>, [<span class="built_in">NSThread</span> currentThread], i);</span><br><span class="line">    &#125;</span><br><span class="line">    dispatch_group_leave(group);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"end-----任务组中的任务全部执行完毕"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-----end-111-----"</span>);</span><br><span class="line">dispatch_group_wait(group, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-----end-222-----"</span>);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>-----end-111-----
+111---&lt;NSThread: 0x600002d99500&gt;{number = 3, name = (null)}---0
+222---&lt;NSThread: 0x600002d87b40&gt;{number = 4, name = (null)}---0
+111---&lt;NSThread: 0x600002d99500&gt;{number = 3, name = (null)}---1
+222---&lt;NSThread: 0x600002d87b40&gt;{number = 4, name = (null)}---1
+end-----任务组中的任务全部执行完毕
+-----end-222-----
 </code></pre></li>
 <li><p><strong>9、GCD快速迭代</strong></p>
   <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-------start-------"</span>);</span><br><span class="line"><span class="comment">// 三个参数分别表示：循环次数   执行任务的队列   索引</span></span><br><span class="line">dispatch_apply(<span class="number">10</span>, dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^(size_t index) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld --- %@"</span>, index, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"-------end-------"</span>);</span><br></pre></td></tr></table></figure>
@@ -466,6 +497,18 @@ end-----任务组中的任务全部执行完毕
 -------end-------
 111-----&lt;NSThread: 0x604000077bc0&gt;{number = 1, name = main}
 222-----&lt;NSThread: 0x60400026eb00&gt;{number = 3, name = (null)}
+</code></pre></li>
+<li><p><strong>11、GCD信号量</strong></p>
+<p>  GCD中的信号量即diapatch_semaphore，是持有计数的信号。当计数为0时，有任务则需要等待；当计数大于等于1时，不需等待直接执行任务，并且计数减1。其相关的三个函数：<br>  1、 dispatch_semaphore_create：创建并初始化信号量<br>  2、 dispatch_semaphore_signal：发送一个信号，让信号总量+1<br>  3、 dispatch_semaphore_wait：使信号总量-1，当信号量为0时就会一直等待，阻塞当前线程。</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">dispatch_semaphore_t semaphore = dispatch_semaphore_create(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"111-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"222-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    <span class="comment">// 信号量加1</span></span><br><span class="line">    dispatch_semaphore_signal(semaphore);</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"1---wait---before"</span>);</span><br><span class="line"><span class="comment">// 信号量为0，一直等待</span></span><br><span class="line">dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"1---wait---after"</span>);</span><br><span class="line">    </span><br><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"333-----%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    <span class="comment">// 信号量加1</span></span><br><span class="line">    dispatch_semaphore_signal(semaphore);</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"2---wait---before"</span>);</span><br><span class="line"><span class="comment">// 信号量为0，一直等待</span></span><br><span class="line">dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"2---wait---after"</span>);</span><br></pre></td></tr></table></figure>
+<p>  输出结果：</p>
+<pre><code>111-----&lt;NSThread: 0x6000035a2900&gt;{number = 1, name = main}
+1---wait---before
+222-----&lt;NSThread: 0x6000035ebbc0&gt;{number = 3, name = (null)}
+1---wait---after
+2---wait---before
+333-----&lt;NSThread: 0x6000035ebbc0&gt;{number = 3, name = (null)}
+2---wait---after
 </code></pre></li>
 </ul>
 
@@ -507,6 +550,10 @@ end-----任务组中的任务全部执行完毕
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/多线程总结（二）/" rel="prev" title="多线程总结（二）">
+                多线程总结（二） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -585,7 +632,7 @@ end-----任务组中的任务全部执行完毕
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,7 +678,7 @@ end-----任务组中的任务全部执行完毕
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、首先了解什么是线程和进程"><span class="nav-text">1、首先了解什么是线程和进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、GCD任务和队列"><span class="nav-text">2、GCD任务和队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、GCD的基本使用"><span class="nav-text">3、GCD的基本使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、首先了解什么是线程和进程"><span class="nav-text">1、首先了解什么是线程和进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、GCD任务和队列"><span class="nav-text">2、GCD任务和队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、GCD的基本使用"><span class="nav-text">3、GCD的基本使用</span></a></li></ol></div>
             
 
           </div>
