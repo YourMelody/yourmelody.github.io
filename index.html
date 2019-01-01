@@ -302,18 +302,21 @@
 
       
         
-          
-            <h2 id="1、关于Dart的重要事实和概念，写在最前面"><a href="#1、关于Dart的重要事实和概念，写在最前面" class="headerlink" title="1、关于Dart的重要事实和概念，写在最前面"></a>1、关于Dart的重要事实和概念，写在最前面</h2><ul>
-<li>在变量中可以放置的所有东西都是对象，每个对象都是类的实例。无论数字、函数和null都是对象，所有对象都集成自【Object】类。</li>
-<li>尽管Dart是强类型的，但类型声明是可选的，因为Dart可以推断类型。如果要明确说明不需要任何类型，请使用【特殊类型dynamic】。</li>
-<li>Dart支持通用类型，如List<int>(整数列表)或List<dynamic>(任何类型的对象列表)。</dynamic></int></li>
-<li>Dart支持顶级函数(如main())，以及绑定到类或对象(分别是静态方法(static)和实例(instance)方法)的函数。还可以在函数(嵌套或局部函数)中创建函数。</li>
-<li>Dart支持顶级变量，以及绑定到类或对象(静态和实例变量)的变量。实例变量有时被称为字段或属性。</li>
-<li>Dart没有public、private和protect关键字。如果标识符以下划线(_)开头，则该标识符对其库是私有的。</li>
+          <h2 id="1、语言特性"><a href="#1、语言特性" class="headerlink" title="1、语言特性"></a>1、语言特性</h2><ul>
+<li><em>Dart</em> 所有的东西都是对象，即使是数字numbers、函数function、null也都是对象，所有的对象都继承自 Object 类。</li>
+<li><em>Dart</em> 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。</li>
+<li><em>Dart</em> 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。</li>
+<li><em>Dart</em> 没有public、private和protect关键字。如果标识符以下划线(_)开头，则该标识符对其库是私有的。</li>
+<li>没有初始化的变量都会被赋予默认值 null。</li>
+<li>final的值只能被设定一次。const 是一个编译时的常量，可以通过 const 来创建常量值，var c=const[];这里 c 还是一个变量，只是被赋值了一个常量值，它还是可以赋其它值。实例变量可以是 final，但不能是 const。</li>
 </ul>
-<h2 id="2、Dart中的所有关键字"><a href="#2、Dart中的所有关键字" class="headerlink" title="2、Dart中的所有关键字"></a>2、Dart中的所有关键字</h2><p><img src="/2018/12/29/Dart2基础篇/dart_keyword.png" alt="关键字"></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/29/Dart2基础篇/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -830,7 +833,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
