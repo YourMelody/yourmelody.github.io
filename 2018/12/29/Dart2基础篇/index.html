@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="1、语言特性 Dart 所有的东西都是对象，即使是数字numbers、函数function、null也都是对象，所有的对象都继承自 Object 类。 Dart 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。 Dart 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。 Dar">
+<meta name="description" content="1、一些重要的概念 Dart 所有的东西都是对象，即使是数字、函数、null也都是对象。所有的对象都继承自 Object 类。 Dart 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。 Dart 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。 Dart 没有public、p">
 <meta name="keywords" content="iOS、JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dart2基础篇">
 <meta property="og:url" content="http://yoursite.com/2018/12/29/Dart2基础篇/index.html">
 <meta property="og:site_name" content="Funny的小笔记">
-<meta property="og:description" content="1、语言特性 Dart 所有的东西都是对象，即使是数字numbers、函数function、null也都是对象，所有的对象都继承自 Object 类。 Dart 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。 Dart 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。 Dar">
+<meta property="og:description" content="1、一些重要的概念 Dart 所有的东西都是对象，即使是数字、函数、null也都是对象。所有的对象都继承自 Object 类。 Dart 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。 Dart 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。 Dart 没有public、p">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/12/29/Dart2基础篇/dart_keyword.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/29/Dart2基础篇/dart_eventqueue.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/29/Dart2基础篇/dart_eventtype.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/29/Dart2基础篇/dart_isolate.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/29/Dart2基础篇/dart_microtaskqueue.png">
-<meta property="og:updated_time" content="2019-01-01T09:27:41.152Z">
+<meta property="og:updated_time" content="2019-01-02T15:07:43.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dart2基础篇">
-<meta name="twitter:description" content="1、语言特性 Dart 所有的东西都是对象，即使是数字numbers、函数function、null也都是对象，所有的对象都继承自 Object 类。 Dart 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。 Dart 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。 Dar">
+<meta name="twitter:description" content="1、一些重要的概念 Dart 所有的东西都是对象，即使是数字、函数、null也都是对象。所有的对象都继承自 Object 类。 Dart 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。 Dart 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。 Dart 没有public、p">
 <meta name="twitter:image" content="http://yoursite.com/2018/12/29/Dart2基础篇/dart_keyword.png">
 
 
@@ -311,28 +311,28 @@
       
 
       
-        <h2 id="1、语言特性"><a href="#1、语言特性" class="headerlink" title="1、语言特性"></a>1、语言特性</h2><ul>
-<li><em>Dart</em> 所有的东西都是对象，即使是数字numbers、函数function、null也都是对象，所有的对象都继承自 Object 类。</li>
+        <h2 id="1、一些重要的概念"><a href="#1、一些重要的概念" class="headerlink" title="1、一些重要的概念"></a>1、一些重要的概念</h2><ul>
+<li><em>Dart</em> 所有的东西都是对象，即使是数字、函数、null也都是对象。所有的对象都继承自 Object 类。</li>
 <li><em>Dart</em> 动态类型语言, 尽量给变量定义一个类型，会更安全，没有显示定义类型的变量在 debug 模式下该类型是 dynamic(动态的)。</li>
 <li><em>Dart</em> 在 running 之前解析你的所有代码，指定数据类型和编译时的常量，可以提高运行速度。</li>
-<li><em>Dart</em> 没有public、private和protect关键字。如果标识符以下划线(_)开头，则该标识符对其库是私有的。</li>
+<li><em>Dart</em> 没有public、private和protected关键字。如果标识符以下划线(_)开头，则该标识符对其库是私有的。</li>
 <li>没有初始化的变量都会被赋予默认值 null。</li>
-<li>final的值只能被设定一次。const 是一个编译时的常量，可以通过 const 来创建常量值，var c=const[];这里 c 还是一个变量，只是被赋值了一个常量值，它还是可以赋其它值。实例变量可以是 final，但不能是 const。</li>
+<li>final的值只能被设定一次。const 是一个编译时的常量，可以通过 const 来创建常量值，var c=const[];这里 c 还是一个变量，只是被赋值了一个常量值，它还是可以赋其它值。</li>
 </ul>
 <a id="more"></a>
-<h2 id="2、Dart中的56个关键字"><a href="#2、Dart中的56个关键字" class="headerlink" title="2、Dart中的56个关键字"></a>2、<em>Dart</em>中的56个关键字</h2><p><img src="/2018/12/29/Dart2基础篇/dart_keyword.png" alt="关键字"></p>
+<h2 id="2、Dart-中的58个关键字"><a href="#2、Dart-中的58个关键字" class="headerlink" title="2、Dart 中的58个关键字"></a>2、<em>Dart</em> 中的58个关键字</h2><p><img src="/2018/12/29/Dart2基础篇/dart_keyword.png" alt="关键字"></p>
 <h2 id="3、常量与变量"><a href="#3、常量与变量" class="headerlink" title="3、常量与变量"></a>3、常量与变量</h2><p>name的类型被推断为String:</p>
 <blockquote>
 <p>var name = ‘Bob’;</p>
 </blockquote>
 <p>如果对象不限于单一类型，或没有明确的类型，可用dynamic/Object:</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic</span> name = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="built_in">Object</span> name = <span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure>
-<p>显式声明要推断的类型:</p>
+<p>显式声明变量的类型:</p>
 <blockquote>
 <p>String name = ‘Bob’;</p>
 </blockquote>
-<p>未初始化的变量初始值默认为null(当然数字类型也是null，因为它也是对象)。</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> lineCount;</span><br><span class="line"><span class="comment">// 在生产环境，assert()调用会被忽略。</span></span><br><span class="line"><span class="comment">// 在开发环境，assert(condition)的condition条件不为真时抛出一个异常。</span></span><br><span class="line"><span class="keyword">assert</span>(lineCount == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<p>所有未初始化的变量默认值都是null</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> lineCount;</span><br><span class="line"><span class="comment">// 在生产环境，assert()会被忽略。</span></span><br><span class="line"><span class="comment">// 在开发环境，assert(condition)的condition不为真时抛出一个异常。</span></span><br><span class="line"><span class="keyword">assert</span>(lineCount == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
 <p>如果某个变量只打算设置一次值，请使用final或const修饰。final变量只能被初始化一次，const变量是一个编译时常量（const变量是隐式的final）。final修饰的变量在第一次声明的时候就要初始化。被final或者const修饰的变量，类型可以省略，但建议指定类型：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以省略String这个类型声明</span></span><br><span class="line"><span class="keyword">final</span> name0 = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="keyword">final</span> <span class="built_in">String</span> name1 = <span class="string">'Bob'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> name2 = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">String</span> name3 = <span class="string">'Bob'</span>;</span><br></pre></td></tr></table></figure>
 <p>被final或const修饰的变量值不能再修改。final或const不能和var同时使用。常量如果是类级别的，建议使用static const：</p>
@@ -353,7 +353,7 @@
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> str1 = <span class="string">'aaaaa'</span>;</span><br><span class="line"><span class="built_in">String</span> str2 = <span class="string">'bbbbb'</span>;</span><br><span class="line"><span class="built_in">int</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span> str3 = <span class="string">'<span class="subst">$str1</span> a "b" <span class="subst">$&#123;str2.toUpperCase()&#125;</span> <span class="subst">$&#123;a.toString()&#125;</span>'</span>;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>bool</strong> <ul>
-<li><em>Dart</em>是强bool类型检查，只有bool类型的值是true，才被认为是true</li>
+<li><em>Dart</em> 是强bool类型检查，只有bool类型的值是true，才被认为是true</li>
 <li>只有两个对象具有bool类型：true和false，它们都是编译时常量</li>
 <li>assert 是语言内置的断言函数，仅在检查模式下有效。条件不为真则引发异常</li>
 </ul>
@@ -384,7 +384,7 @@
 </ul>
 <p>将可能出现异常的代码放到 try 语句中，可以通过 on 语句来指定需要捕获的异常类型，但不能获取异常对象；使用 catch 可以捕获到异常对象。rethrow可以重新抛出捕获的异常</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">test1() &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        test2();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'test1 -- e -- <span class="subst">$e<span class="string">');</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">test2() &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    try &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        throw FormatException('</span></span>this is exception'</span>);</span><br><span class="line">    &#125; on OutOfMemoryError &#123; <span class="comment">// 可以捕获指定类型的异常</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'out of memory'</span>);</span><br><span class="line">    &#125; on FormatException <span class="keyword">catch</span> (e) &#123; <span class="comment">// 匹配不到FormatException，会继续匹配</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'exception error: <span class="subst">$e<span class="string">');</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        // 重新抛出异常，可以在test1的catch中重新捕获异常</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        rethrow; </span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    &#125; catch (e, r) &#123; // 匹配所有类型的异常：e是异常对象，r时异常的堆栈信息</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        print('</span></span>exception details: <span class="subst">$e<span class="string">');</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        print('</span></span>stack trace: <span class="subst">$r<span class="string">');</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    &#125; finally &#123; // 一定会执行，如果try/catch中有return，会在return之前执行</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        print('</span></span>this is finally'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="6、函数Function"><a href="#6、函数Function" class="headerlink" title="6、函数Function"></a>6、函数Function</h2><p><em>Dart</em>的函数有两种类型的参数：必需的和可选的。可选参数可以有一个默认值，在调用者没有指定可选参数时使用默认值。可选参数又分为：可选命名参数和可选位置参数。</p>
+<h2 id="6、函数Function"><a href="#6、函数Function" class="headerlink" title="6、函数Function"></a>6、函数Function</h2><p><em>Dart</em> 的函数有两种类型的参数：必需的和可选的。可选参数可以有一个默认值，在调用者没有指定可选参数时使用默认值。可选参数又分为：可选命名参数和可选位置参数。</p>
 <ul>
 <li><strong>可选命名参数:</strong> 使用{}包围的参数属于可选命名参数，可设置默认值，在调用的时候，需要使用paramName:value的形式指定为哪个可选参数赋值。</li>
 </ul>
@@ -400,7 +400,7 @@
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="built_in">int</span> x;</span><br><span class="line">    <span class="built_in">int</span> y;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    Point(<span class="built_in">int</span> a, <span class="built_in">int</span> b) &#123;</span><br><span class="line">        <span class="keyword">this</span>.x = a;</span><br><span class="line">        <span class="keyword">this</span>.y = b;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 上面的构造函数可以简化为：</span></span><br><span class="line">    Point(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y);</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 命名构造函数</span></span><br><span class="line">    Point.fromJson(<span class="built_in">Map</span> data) &#123;</span><br><span class="line">        x = data[<span class="string">'x'</span>];</span><br><span class="line">        y = data[<span class="string">'y'</span>];</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 可以在构造函数打括号前来初始化实例的变量值，多个实例变量用逗号隔开</span></span><br><span class="line">    Point.fromJson(<span class="built_in">Map</span> data)</span><br><span class="line">        : x = data[<span class="string">'x'</span>], y = data[<span class="string">'y'</span>] &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'x = <span class="subst">$s</span>, y = <span class="subst">$y<span class="string">');</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">&#125;</span></span></span></span><br></pre></td></tr></table></figure>
 <h2 id="8、Dart-中的异步"><a href="#8、Dart-中的异步" class="headerlink" title="8、Dart 中的异步"></a>8、<em>Dart</em> 中的异步</h2><ul>
 <li><p><strong>Event-Looper</strong></p>
-<p>  <em>Dart</em> 是单线程模型，也就没有所谓的主线程/子线程。Dart也是Event-Looper以及Event-Queue的模型，所有的事件都是通过EventLooper依次执行。<em>Dart</em> 的Event Loop是：</p>
+<p>  <em>Dart</em> 是单线程模型，也就没有所谓的主线程/子线程。 <em>Dart</em> 也是Event-Looper以及Event-Queue的模型，所有的事件都是通过EventLooper依次执行。 <em>Dart</em> 的Event Loop是：</p>
 <ul>
 <li>从EventQueue中获取Event</li>
 <li>处理Event</li>
@@ -412,12 +412,12 @@
 </ul>
 </li>
 <li><p><strong>单线程模型</strong></p>
-<p>  一旦某个Dart的函数开始执行，它将执行到这个函数结束，也就是Dart的函数不会被其它Dart代码打断。Dart中没有线程的概念，只有isolate，每个isolate都是隔离的，并不会共享内存。</p>
-<p>  一个Dart程序是在Main isolate的main函数开始，在main函数结束后，Main isolate开始一个一个的处理Event Queue中的每一个Event。</p>
+<p>  一旦某个 <em>Dart</em> 的函数开始执行，它将执行到这个函数结束，也就是 <em>Dart</em> 的函数不会被其它 <em>Dart</em> 代码打断。 <em>Dart</em> 中没有线程的概念，只有isolate，每个isolate都是隔离的，并不会共享内存。</p>
+<p>  一个 <em>Dart</em> 程序是在Main isolate的main函数开始，在main函数结束后，Main isolate开始一个一个的处理Event Queue中的每一个Event。</p>
 <p>  <img src="/2018/12/29/Dart2基础篇/dart_isolate.png" alt="Event Queue"></p>
 </li>
 <li><p><strong>Event Queue以及Microtask Queue</strong></p>
-<p>  Dart中的Main isolate只有一个Event Looper，但存在两个Queue：Event Queue和Microtask Queue。Microtask Queue存在的意义是：</p>
+<p>   <em>Dart</em> 中的Main isolate只有一个Event Looper，但存在两个Queue：Event Queue和Microtask Queue。Microtask Queue存在的意义是：</p>
 <blockquote>
 <p>希望通过这个Queue来处理稍晚一些，但是在下一个消息到来之前需要处理完的事情。</p>
 </blockquote>
@@ -427,12 +427,12 @@
 <li>优先全部执行完Microtask Queue中的Event</li>
 <li><p>直到Microtask Queue为空时，再执行Event Queue中的Event</p>
 <p><img src="/2018/12/29/Dart2基础篇/dart_microtaskqueue.png" alt="Event Queue"></p>
-<p>Dart中只知道Event处理的先后顺序，并不知道某个Event执行的具体时间点。</p>
+<p><em>Dart</em> 中只知道Event处理的先后顺序，并不知道某个Event执行的具体时间点。</p>
 </li>
 </ul>
 </li>
 <li><p><strong>异步任务调度</strong></p>
-<p>  当有代码可以在后续任务执行的时候，有两种方式，通过dart:async中的API即可</p>
+<p>  当有代码可以在后续任务执行的时候，有两种方式，通过 <em>dart:async</em> 中的API即可</p>
 <ul>
 <li><p>使用Future类，可以将任务加入到Event Queue的队尾</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般常用的Future构造函数</span></span><br><span class="line"><span class="keyword">new</span> Future(() &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当需要将任务拆分成很多小任务一步一步执行时，可以使用Future.then来拆解任务</span></span><br><span class="line"><span class="keyword">new</span> Future(() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'abc'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">21</span>;</span><br><span class="line">&#125;).then((value) =&gt; <span class="string">'!!!then01 <span class="subst">$value</span>!!!'</span>) <span class="comment">//这里的value是上面任务的返回值</span></span><br><span class="line">  .then((value) &#123;</span><br><span class="line">    <span class="comment">// 这里的value为上一个任务执行完的返回结果</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'===then02 <span class="subst">$value</span>==='</span>); <span class="comment">// ===then02 !!!then01 21!!!===</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'balabala'</span>;</span><br><span class="line">&#125;).then((value)&#123;</span><br><span class="line">    <span class="comment">// 这里的value是上个任务的返回值</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'~~~then03 <span class="subst">$value</span>~~~~'</span>); <span class="comment">// ~~~then03 balabala~~~~</span></span><br><span class="line">&#125;).whenComplete(() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'complete'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当任务需要延时执行，可以使用Future.delay。</span></span><br><span class="line"><span class="comment">// 只有当Main isolate的Event Queue处于Idle的状态是，才会延时指定的时间执行</span></span><br><span class="line"><span class="comment">// 否则等待时间会大于指定的时间</span></span><br><span class="line"><span class="keyword">new</span> Future.delayed(<span class="keyword">const</span> <span class="built_in">Duration</span>(seconds: <span class="number">1</span>), () &#123;<span class="built_in">print</span>(<span class="string">'123'</span>);&#125;);</span><br></pre></td></tr></table></figure>
@@ -608,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、语言特性"><span class="nav-text">1、语言特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Dart中的56个关键字"><span class="nav-text">2、Dart中的56个关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、常量与变量"><span class="nav-text">3、常量与变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、数据类型"><span class="nav-text">4、数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、异常-Exception"><span class="nav-text">5、异常(Exception)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、函数Function"><span class="nav-text">6、函数Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、类的构造函数"><span class="nav-text">7、类的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、Dart-中的异步"><span class="nav-text">8、Dart 中的异步</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、一些重要的概念"><span class="nav-text">1、一些重要的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Dart-中的58个关键字"><span class="nav-text">2、Dart 中的58个关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、常量与变量"><span class="nav-text">3、常量与变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、数据类型"><span class="nav-text">4、数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、异常-Exception"><span class="nav-text">5、异常(Exception)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、函数Function"><span class="nav-text">6、函数Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、类的构造函数"><span class="nav-text">7、类的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、Dart-中的异步"><span class="nav-text">8、Dart 中的异步</span></a></li></ol></div>
             
 
           </div>
