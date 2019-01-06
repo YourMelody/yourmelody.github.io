@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、Widget State在 Flutter 中，一切能显示的都是 Widget 。 Widget 是一切的基础，作为响应式的渲染，属于 MVVM 的实现机制。我们可以通过修改数据，再用 setState 设置数据， Flutter 会自动通过绑定的数据更新 Widget 。我们需要做的就是实现 Widget 页面，并且和数据绑定起来。 Widget 分为 有状态 和 无状态 两种。在 Flut">
+<meta name="keywords" content="iOS、JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Widget基础篇">
+<meta property="og:url" content="http://yoursite.com/2019/01/05/Widget基础篇/index.html">
+<meta property="og:site_name" content="Funny的小笔记">
+<meta property="og:description" content="1、Widget State在 Flutter 中，一切能显示的都是 Widget 。 Widget 是一切的基础，作为响应式的渲染，属于 MVVM 的实现机制。我们可以通过修改数据，再用 setState 设置数据， Flutter 会自动通过绑定的数据更新 Widget 。我们需要做的就是实现 Widget 页面，并且和数据绑定起来。 Widget 分为 有状态 和 无状态 两种。在 Flut">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://camo.githubusercontent.com/ce09e689b2860fb7e47d511a571ba47ab6705c79/68747470733a2f2f696d672e616c6963646e2e636f6d2f7466732f54423175325f3466567a714b31526a535a467658586342375658612d3834362d343638352e706e67">
+<meta property="og:image" content="http://yoursite.com/2019/01/05/Widget基础篇/widget_desc.png">
+<meta property="og:updated_time" content="2019-01-06T12:00:50.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Widget基础篇">
+<meta name="twitter:description" content="1、Widget State在 Flutter 中，一切能显示的都是 Widget 。 Widget 是一切的基础，作为响应式的渲染，属于 MVVM 的实现机制。我们可以通过修改数据，再用 setState 设置数据， Flutter 会自动通过绑定的数据更新 Widget 。我们需要做的就是实现 Widget 页面，并且和数据绑定起来。 Widget 分为 有状态 和 无状态 两种。在 Flut">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/ce09e689b2860fb7e47d511a571ba47ab6705c79/68747470733a2f2f696d672e616c6963646e2e636f6d2f7466732f54423175325f3466567a714b31526a535a467658586342375658612d3834362d343638352e706e67">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/05/Widget基础篇/">
+
+
+
+
+
+  <title>Widget基础篇 | Funny的小笔记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Funny的小笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/Widget基础篇/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Funny">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Funny的小笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Widget基础篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T17:35:50+08:00">
+                2019-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1、Widget-State"><a href="#1、Widget-State" class="headerlink" title="1、Widget State"></a>1、Widget State</h2><p>在 <strong>Flutter</strong> 中，一切能显示的都是 <strong>Widget</strong> 。 <strong>Widget</strong> 是一切的基础，作为响应式的渲染，属于 <strong>MVVM</strong> 的实现机制。我们可以通过修改数据，再用 <strong>setState</strong> 设置数据， <strong>Flutter</strong> 会自动通过绑定的数据更新 <strong>Widget</strong> 。我们需要做的就是实现 <strong>Widget</strong> 页面，并且和数据绑定起来。</p>
+<p><strong>Widget</strong> 分为 <em>有状态</em> 和 <em>无状态</em> 两种。在 <strong>Flutter</strong> 中每个页面都是一帧。无状态就是保持在那一帧；有状态的 <strong>Widget</strong> 当数据更新时，其实就是绘制了新的 <strong>Widget</strong> 。</p>
+<a id="more"></a>
+<ul>
+<li><p>无状态 <strong>StalessWidget</strong></p>
+<p>  无状态的 <strong>Widget</strong> 实现很简单：创建一个继承自 <strong>StatelessWidget</strong> 的 <strong>Widget</strong> ，并通过 <strong>build</strong> 方法返回一个布局好的控件。<strong>Widget</strong> 和 <strong>Widget</strong> 之间通过 <strong>child</strong> 或 <strong>children</strong> 进行嵌套。</p>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyStateless</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="built_in">String</span> text;</span><br><span class="line">    MyStateless(<span class="keyword">this</span>.text);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">        <span class="keyword">return</span> Scaffold(</span><br><span class="line">            appBar: AppBar(</span><br><span class="line">                title: Text(<span class="string">'StatelessWidget'</span>),</span><br><span class="line">            ),</span><br><span class="line">            body: Container(</span><br><span class="line">                color: Colors.white,</span><br><span class="line">                <span class="comment">//Dart语法中，?? 表示如果text为空，就返回尾号后的内容。</span></span><br><span class="line">                child: Text(text ?? <span class="string">"这就是无状态DMEO"</span>),</span><br><span class="line">            ),</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>有状态 <strong>StatefulWidget</strong></li>
+</ul>
+<p>有状态的 <strong>Widget</strong> 需要管理 <strong>state</strong> ,通过 <strong>setState</strong> 改变数据触发 <strong>Widget</strong> 重新构建刷新。主要的生命周期有：</p>
+<blockquote>
+<p><strong>initState:</strong> 初始化，理论上只会初始化一次<br><strong>didChangeDependencies:</strong> 在 <strong>initState</strong> 之后 <strong>build</strong> 之前调用<br><strong>dispose:</strong> 销毁，只会调用一次</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyStateful</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    State&lt;StatefulWidget&gt; createState() &#123;</span><br><span class="line">        <span class="keyword">return</span> _MyStatefulState();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyStatefulState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyStateful</span>&gt; </span>&#123;</span><br><span class="line">    <span class="built_in">int</span> pressCount;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    <span class="keyword">void</span> initState() &#123;</span><br><span class="line">        <span class="keyword">super</span>.initState();</span><br><span class="line">        pressCount = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">        <span class="keyword">return</span> Container(</span><br><span class="line">            child: FlatButton(</span><br><span class="line">                onPressed: () &#123;</span><br><span class="line">                    setState(() &#123;</span><br><span class="line">                       pressCount += <span class="number">1</span>;</span><br><span class="line">                    &#125;);</span><br><span class="line">                 &#125;,</span><br><span class="line">            </span><br><span class="line">                 child: Center(</span><br><span class="line">                    child: Text(<span class="string">'有状态的Widget，可戳👇--<span class="subst">$pressCount<span class="string">'),</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">                 )</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">             ),</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">        );</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">&#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<p>不管是有状态的还是无状态的 <strong>Widget</strong> ，我们需要做的就是在 <strong>build</strong> 中堆积我们的布局，把数据添加到 <strong>Widget</strong> 中，有状态的可以通过 <strong>setState</strong> 改变数据，从而刷新UI，就这么简单。</p>
+<h2 id="2、Flutter中的Widget"><a href="#2、Flutter中的Widget" class="headerlink" title="2、Flutter中的Widget"></a>2、Flutter中的Widget</h2><p>先来看一张图，这张图中几乎包含了 <strong>Flutter</strong> 中所有的 <strong>Widget</strong>：</p>
+<p><img src="https://camo.githubusercontent.com/ce09e689b2860fb7e47d511a571ba47ab6705c79/68747470733a2f2f696d672e616c6963646e2e636f6d2f7466732f54423175325f3466567a714b31526a535a467658586342375658612d3834362d343638352e706e67" alt="widget"></p>
+<p>我们先针对其中比较常用的讲解下其特性和使用。</p>
+<h2 id="3、布局相关的常用Widget"><a href="#3、布局相关的常用Widget" class="headerlink" title="3、布局相关的常用Widget"></a>3、布局相关的常用Widget</h2><ul>
+<li><p><strong>Container</strong></p>
+<p>  最常用的布局。只能包含一个 <strong>child</strong> ，默认铺满。支持配置 <strong>padding</strong> 、<strong>margin</strong> 、<strong>color</strong> 、宽高、<strong>decoration</strong> (一般配置边框和阴影等)。不是所有的空间都有 <strong>padding</strong> 、<strong>margin</strong> 、<strong>color</strong> 、宽高等属性，所以才会有 <strong>Padding</strong> 、<strong>Center</strong> 等 <strong>Widget</strong> 的存在。</p>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ContainerDemo</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">        <span class="keyword">return</span> Container(</span><br><span class="line">            child: Center(</span><br><span class="line">                child:  Text(</span><br><span class="line">                    <span class="string">'无状态的Widget'</span>,</span><br><span class="line">                    textAlign: TextAlign.center,</span><br><span class="line">                )</span><br><span class="line">            ),</span><br><span class="line">            </span><br><span class="line">            height: <span class="number">49</span>,</span><br><span class="line">            margin: EdgeInsets.all(<span class="number">20</span>),</span><br><span class="line">            padding: EdgeInsets.only(top: <span class="number">10</span>),</span><br><span class="line">            <span class="comment">// color: Colors.blueGrey,</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 使用它就不能设置Container的color</span></span><br><span class="line">            decoration: BoxDecoration(</span><br><span class="line">                borderRadius: BorderRadius.only(</span><br><span class="line">                    topLeft: Radius.circular(<span class="number">10</span>),</span><br><span class="line">                    bottomRight: Radius.circular(<span class="number">10</span>)</span><br><span class="line">                ),</span><br><span class="line">                color: Colors.blue,</span><br><span class="line">                border: Border.all(</span><br><span class="line">                    color: Color(<span class="number">0xFF000000</span>),</span><br><span class="line">                    width: <span class="number">1</span></span><br><span class="line">                )</span><br><span class="line">            ),</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Column、Row和Expanded</strong></p>
+<p>  竖直布局和水平布局也是很常见的场景。它们都可以通过 <strong>children</strong> 设置多个子 <strong>Widget</strong> ，可以设置主轴和副轴方向布局方式等。而 <strong>Expended</strong> 在 <strong>Column</strong> 和 <strong>Row</strong> 中默认代表着平均充满。当然可以通过设置 <strong>flex</strong> 属性决定占屏比例。</p>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">_columnDemo() &#123;</span><br><span class="line">    <span class="keyword">return</span> Column(</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">            Expanded(child: Container(</span><br><span class="line">                child: Text(<span class="string">'aaa'</span>),</span><br><span class="line">                color: Colors.grey,</span><br><span class="line">            )),</span><br><span class="line">            Expanded(child: Container(</span><br><span class="line">                child: Text(<span class="string">'bbb'</span>),</span><br><span class="line">                color: Colors.blueGrey,</span><br><span class="line">            )),</span><br><span class="line">            Expanded(</span><br><span class="line">                child: Container(</span><br><span class="line">                    child: Text(<span class="string">'ccc'</span>),</span><br><span class="line">                    color: Colors.red</span><br><span class="line">                ),</span><br><span class="line">                flex: <span class="number">2</span></span><br><span class="line">            )</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">// 主轴方向布局方式</span></span><br><span class="line">        mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">        <span class="comment">// 大小按照最大充满（这里使用Expanded会最大充满不受该属性设置影响）</span></span><br><span class="line">        mainAxisSize : MainAxisSize.min,</span><br><span class="line">        <span class="comment">// 副轴方向布局方式</span></span><br><span class="line">        crossAxisAlignment: CrossAxisAlignment.center</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4、其它常用Widget"><a href="#4、其它常用Widget" class="headerlink" title="4、其它常用Widget"></a>4、其它常用Widget</h2><p><strong>Flutter</strong> 中除了布局的 <strong>Widget</strong> ，还有交互显示和完整页面呈现的 <strong>Widget</strong> 。其中常见的有 <strong>MaterialApp</strong> 、<strong>Scaffold</strong> 、<strong>Appbar</strong> 、<strong>Text</strong> 、<strong>Image</strong> 、<strong>FlatButton</strong> 等。</p>
+<p><img src="/2019/01/05/Widget基础篇/widget_desc.png" alt="常用Widget及特点"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/29/Dart2基础篇/" rel="next" title="Dart2基础篇">
+                <i class="fa fa-chevron-left"></i> Dart2基础篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Funny">
+            
+              <p class="site-author-name" itemprop="name">Funny</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Widget-State"><span class="nav-text">1、Widget State</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Flutter中的Widget"><span class="nav-text">2、Flutter中的Widget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、布局相关的常用Widget"><span class="nav-text">3、布局相关的常用Widget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、其它常用Widget"><span class="nav-text">4、其它常用Widget</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Funny</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
