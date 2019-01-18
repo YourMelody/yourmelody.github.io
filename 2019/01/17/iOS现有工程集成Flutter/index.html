@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、现有工程接入Flutter 开始本文操作之前，先确保是否已经安装完成了Flutter环境以及相关环境变量的配置，并且在终端执行 flutter doctor 没有报错。具体过程可参考Flutter中文网">
+<meta name="keywords" content="iOS、JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS现有工程集成Flutter">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/index.html">
+<meta property="og:site_name" content="Funny的学习笔记">
+<meta property="og:description" content="一、现有工程接入Flutter 开始本文操作之前，先确保是否已经安装完成了Flutter环境以及相关环境变量的配置，并且在终端执行 flutter doctor 没有报错。具体过程可参考Flutter中文网">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_doctor.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_directory.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_config.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_script.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_xcodesh.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_build.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_file.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_framework.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_attach.png">
+<meta property="og:updated_time" content="2019-01-18T07:03:10.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS现有工程集成Flutter">
+<meta name="twitter:description" content="一、现有工程接入Flutter 开始本文操作之前，先确保是否已经安装完成了Flutter环境以及相关环境变量的配置，并且在终端执行 flutter doctor 没有报错。具体过程可参考Flutter中文网">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/flutter_doctor.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/">
+
+
+
+
+
+  <title>iOS现有工程集成Flutter | Funny的学习笔记</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Funny的学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/iOS现有工程集成Flutter/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Funny">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Funny的学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS现有工程集成Flutter</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T20:06:24+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、现有工程接入Flutter"><a href="#一、现有工程接入Flutter" class="headerlink" title="一、现有工程接入Flutter"></a>一、现有工程接入Flutter</h2><blockquote>
+<p>开始本文操作之前，先确保是否已经安装完成了Flutter环境以及相关环境变量的配置，并且在终端执行 <strong>flutter doctor</strong> 没有报错。具体过程可参考<a href="https://flutterchina.club/get-started/install/" target="_blank" rel="noopener">Flutter中文网</a></p>
+</blockquote>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_doctor.png" width="340" align="center"></p>
+<a id="more"></a>
+<p><strong>1、flutter doctor 检测失败原因有：</strong></p>
+<ul>
+<li>没有安装 Android Studio</li>
+<li>Android Studio 配置有问题</li>
+<li>Android Studio 没有安装Flutter插件</li>
+<li>没有安装Xcode，或Xcode版本过低</li>
+<li>没有安装CocoaPods</li>
+<li>没有安装 libimobiledevice</li>
+<li>没有安装 ideviceinstaller</li>
+<li>没有安装 ios-deploy</li>
+</ul>
+<p><strong>2、创建Flutter模块</strong></p>
+<p>在Native工程同级目录下，执行flutter命令创建：<strong>flutter create -t module flutter_library</strong>。其中flutter_library是自定义的flutter模块名字。完成这部操作后，项目目录结构如下：</p>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_directory.png" width="340" align="center"></p>
+<p><strong>3、在Native工程中创建相关配置文件</strong></p>
+<ul>
+<li><p>Config文件夹下分别创建 <strong>Flutter.xcconfig</strong>、<strong>Debug.xcconfig</strong>、<strong>Release.xcconfig</strong> 三个配置文件。</p>
+</li>
+<li><p><strong>Flutter.xcconfig</strong> 指向flutter_library（即刚创建的flutter模块）中的<strong>Generated.xcconfig</strong> 文件路径，其内容为：</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#include <span class="meta-string">"../flutter_library/.ios/Flutter/Generated.xcconfig"</span></span></span><br><span class="line">ENABLE_BITCODE=<span class="literal">NO</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Debug.xcconfig</strong> 环境配置文件</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#include <span class="meta-string">"Flutter.xcconfig"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果使用了Cocoapods，那么需要引入 cocoapods 的config文件，注意修改自己的路径名称</span></span><br><span class="line"><span class="meta">#include <span class="meta-string">"Pods/Target Support Files/Pods-Flutter_iOS/Pods-Flutter_iOS.debug.xcconfig"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Release.xcconfig</strong> 环境配置文件</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#include <span class="meta-string">"Flutter.xcconfig"</span></span></span><br><span class="line">FLUTTER_BUILD_MODE=release</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果使用了Cocoapods，那么需要引入 cocoapods 的config文件，注意修改自己的路径名称</span></span><br><span class="line"><span class="meta">#include <span class="meta-string">"Pods/Target Support Files/Pods-Flutter_iOS/Pods-Flutter_iOS.release.xcconfig"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>项目中指定使用config</p>
+<p>  <img src="/2019/01/17/iOS现有工程集成Flutter/flutter_config.png" width="400" align="center"></p>
+</li>
+</ul>
+<p><strong>4、设置脚本</strong></p>
+<p>在Run Script中增加</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh"</span> build</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_script.png" width="320" align="center"></p>
+<p><strong>5、修改xcode_backend.sh脚本文件</strong></p>
+<p>编译/运行工程，会执行上一步在Run Script配置的脚本文件。执行改脚本文件，默认会在flutter模块（即之前创建的flutter_library）下产生编译好的framework，并不是在Native项目中。所以通过修改xcode_backend.sh这个脚本文件，让编译好的framework直接在Native项目中。修改如下：</p>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_xcodesh.png" width="360" align="center"></p>
+<p><strong>6、按照上述步骤配置好之后，编译Native工程，会在项目中生成Flutter相关的编译产物，然后将其拖入工程中</strong></p>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_build.png" width="360" align="center"></p>
+<p>其中:</p>
+<ul>
+<li>App.framework: dart业务源码相关文件，在Debug模式下是一个很小的空壳，在Release模式下包含全部业务逻辑</li>
+<li>flutter_assets: Flutter依赖的静态资源，包括字体、图片等</li>
+<li>engine文件夹下的Flutter.framework: Flutter库和引擎</li>
+</ul>
+<p>flutter_assets 拖入工程的时候选择Create folder reference，App.framework和engine选择Create groups，这样之后工程目录如下：</p>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_file.png" width="300" align="center"></p>
+<p>然后将App.framework和engine文件夹下的Flutter.framework添加到Embeded Binaries中</p>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_framework.png" width="360" align="center"></p>
+<p><strong>7、AppDelegate改造</strong></p>
+<p>Flutter需要和App进行交互，需要对AppDelegate进行改造。</p>
+<p>AppDelegate.h文件中，继承FlutterAppDelegate，删除window属性（FlutterAppDelegate中有）</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Flutter/Flutter.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AppDelegate</span> : <span class="title">FlutterAppDelegate</span> &lt;<span class="title">UIApplicationDelegate</span>, <span class="title">FlutterAppLifeCycleProvider</span>&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>AppDelegate.m改造，转发代理消息。把所有用到的代理方法，都改为以下方式，使用_lifeCycleDelegate再调用一次。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"AppDelegate.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AppDelegate</span> ()</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AppDelegate</span></span></span><br><span class="line">&#123;</span><br><span class="line">  FlutterPluginAppLifeCycleDelegate *_lifeCycleDelegate;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">instancetype</span>)init &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</span><br><span class="line">        _lifeCycleDelegate = [[FlutterPluginAppLifeCycleDelegate alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span>*)launchOptions &#123;</span><br><span class="line">    <span class="keyword">return</span> [_lifeCycleDelegate application:application didFinishLaunchingWithOptions:launchOptions];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)applicationDidEnterBackground:(<span class="built_in">UIApplication</span>*)application &#123;</span><br><span class="line">    [_lifeCycleDelegate applicationDidEnterBackground:application];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)applicationWillEnterForeground:(<span class="built_in">UIApplication</span>*)application &#123;</span><br><span class="line">    [_lifeCycleDelegate applicationWillEnterForeground:application];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span>*)application &#123;</span><br><span class="line">    [_lifeCycleDelegate applicationWillResignActive:application];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)applicationDidBecomeActive:(<span class="built_in">UIApplication</span>*)application &#123;</span><br><span class="line">    [_lifeCycleDelegate applicationDidBecomeActive:application];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)applicationWillTerminate:(<span class="built_in">UIApplication</span>*)application &#123;</span><br><span class="line">    [_lifeCycleDelegate applicationWillTerminate:application];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">didRegisterUserNotificationSettings:(<span class="built_in">UIUserNotificationSettings</span>*)notificationSettings &#123;</span><br><span class="line">    [_lifeCycleDelegate application:application</span><br><span class="line">didRegisterUserNotificationSettings:notificationSettings];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span>*)deviceToken &#123;</span><br><span class="line">    [_lifeCycleDelegate application:application</span><br><span class="line">didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span>*)userInfo</span><br><span class="line">fetchCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span> result))completionHandler &#123;</span><br><span class="line">    [_lifeCycleDelegate application:application</span><br><span class="line">       didReceiveRemoteNotification:userInfo</span><br><span class="line">             fetchCompletionHandler:completionHandler];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">            openURL:(<span class="built_in">NSURL</span>*)url</span><br><span class="line">            options:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">UIApplicationOpenURLOptionsKey</span>, <span class="keyword">id</span>&gt;*)options &#123;</span><br><span class="line">    <span class="keyword">return</span> [_lifeCycleDelegate application:application openURL:url options:options];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span>*)application handleOpenURL:(<span class="built_in">NSURL</span>*)url &#123;</span><br><span class="line">    <span class="keyword">return</span> [_lifeCycleDelegate application:application handleOpenURL:url];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">            openURL:(<span class="built_in">NSURL</span>*)url</span><br><span class="line">  sourceApplication:(<span class="built_in">NSString</span>*)sourceApplication</span><br><span class="line">         annotation:(<span class="keyword">id</span>)annotation &#123;</span><br><span class="line">    <span class="keyword">return</span> [_lifeCycleDelegate application:application</span><br><span class="line">                                   openURL:url</span><br><span class="line">                         sourceApplication:sourceApplication</span><br><span class="line">                                annotation:annotation];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">performActionForShortcutItem:(<span class="built_in">UIApplicationShortcutItem</span>*)shortcutItem</span><br><span class="line">  completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> succeeded))completionHandler <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0) &#123;</span><br><span class="line">    [_lifeCycleDelegate application:application</span><br><span class="line">       performActionForShortcutItem:shortcutItem</span><br><span class="line">                  completionHandler:completionHandler];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">handleEventsForBackgroundURLSession:(<span class="keyword">nonnull</span> <span class="built_in">NSString</span>*)identifier</span><br><span class="line">  completionHandler:(<span class="keyword">nonnull</span> <span class="keyword">void</span> (^)(<span class="keyword">void</span>))completionHandler &#123;</span><br><span class="line">    [_lifeCycleDelegate application:application</span><br><span class="line">handleEventsForBackgroundURLSession:identifier</span><br><span class="line">                  completionHandler:completionHandler];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span>*)application</span><br><span class="line">performFetchWithCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span> result))completionHandler &#123;</span><br><span class="line">    [_lifeCycleDelegate application:application performFetchWithCompletionHandler:completionHandler];</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)addApplicationLifeCycleDelegate:(<span class="built_in">NSObject</span>&lt;FlutterPlugin&gt;*)delegate &#123;</span><br><span class="line">    [_lifeCycleDelegate addDelegate:delegate];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark - Flutter</span></span><br><span class="line">    <span class="comment">// Returns the key window's rootViewController, if it's a FlutterViewController.</span></span><br><span class="line">    <span class="comment">// Otherwise, returns nil.</span></span><br><span class="line">- (FlutterViewController*)rootFlutterViewController &#123;</span><br><span class="line">    <span class="built_in">UIViewController</span>* viewController = [<span class="built_in">UIApplication</span> sharedApplication].keyWindow.rootViewController;</span><br><span class="line">    <span class="keyword">if</span> ([viewController isKindOfClass:[FlutterViewController <span class="keyword">class</span>]]) &#123;</span><br><span class="line">        <span class="keyword">return</span> (FlutterViewController*)viewController;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>*)touches withEvent:(<span class="built_in">UIEvent</span>*)event &#123;</span><br><span class="line">    [<span class="keyword">super</span> touchesBegan:touches withEvent:event];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Pass status bar taps to key window Flutter rootViewController.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.rootFlutterViewController != <span class="literal">nil</span>) &#123;</span><br><span class="line">        [<span class="keyword">self</span>.rootFlutterViewController handleStatusBarTouches:event];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p><strong>8、hot reload和hot restart</strong></p>
+<p>在第一次跳转flutter页面之前，先在flutter模块（即之前创建的flutter_library）根目录下执行flutter attach，之后跳转flutter页面，就可以通过在终端输入 <strong>r</strong> 来hot reload（即刷新flutter的UI，但是不会保留状态），输入 <strong>R</strong> 来hot restart（即重新加载flutter页面，状态也会刷新）</p>
+<p><img src="/2019/01/17/iOS现有工程集成Flutter/flutter_attach.png" width="360" align="center"></p>
+<p><strong>9、设置splashScreenView</strong></p>
+<p>由于第一次跳转flutter页面的时候，需要加载一些flutter的依赖，会消耗一些时间，所以第一次跳转会比较慢，有个过渡时间。可以通过splashScreenView来设置过渡时候展示的页面。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FlutterViewController* flutterViewController = [[FlutterViewController alloc] initWithProject:<span class="literal">nil</span> nibName:<span class="literal">nil</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">UIView</span> *splashView = [[<span class="built_in">UIView</span> alloc] initWithFrame:flutterViewController.view.frame];</span><br><span class="line">splashView.backgroundColor = [<span class="built_in">UIColor</span> blueColor];</span><br><span class="line">flutterViewController.splashScreenView = splashView;</span><br><span class="line">[<span class="keyword">self</span> presentViewController:flutterViewController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="二、iOS和Flutter交互"><a href="#二、iOS和Flutter交互" class="headerlink" title="二、iOS和Flutter交互"></a>二、iOS和Flutter交互</h2><ul>
+<li>1、通过FlutterMethodChannel，Flutter主动给Native发送消息</li>
+</ul>
+<p>iOS部分的代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">FlutterViewController *flutterVC = [[FlutterViewController alloc] initWithNibName:<span class="literal">nil</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 通过setInitialRoute：设置路由名字，根据这个名字可以跳转到不同的flutter页面</span></span><br><span class="line">[flutterVC setInitialRoute:<span class="string">@"normalDemo"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个字符串相当于一个标识，要与Flutter保持一致(类比iOS发送通知的名字)</span></span><br><span class="line"><span class="built_in">NSString</span> *channelName = <span class="string">@"com.jk.funny/method_channel"</span>;</span><br><span class="line">FlutterMethodChannel *messageChannel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:flutterVC];</span><br><span class="line">[messageChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) &#123;</span><br><span class="line">    <span class="comment">// call.method 获取flutter传过来的方法名</span></span><br><span class="line">    <span class="comment">// call.arguments 获取到flutter传递过来的参数</span></span><br><span class="line">    <span class="comment">// result 是给flutter的回调</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([call.method isEqualToString:<span class="string">@"backToNative"</span>]) &#123;</span><br><span class="line">        [<span class="keyword">self</span>.navigationController popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([call.method isEqualToString:<span class="string">@"updateFlutter"</span>]) &#123;</span><br><span class="line">        <span class="built_in">NSDictionary</span> *dic = call.arguments;</span><br><span class="line">        flutterVC.title = dic[<span class="string">@"title"</span>];</span><br><span class="line">        <span class="comment">// iOS给flutter的返回值</span></span><br><span class="line">        result(<span class="string">@"返回给flutter的内容"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[<span class="keyword">self</span>.navigationController pushViewController:flutterVC animated:<span class="literal">YES</span>];</span><br></pre></td></tr></table></figure>
+<p>Flutter对应的相关代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// flutter主动给native发送消息（native接收到消息，可以再次给flutter发送消息）</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> methodChannel = <span class="keyword">const</span> MethodChannel(<span class="string">'com.jk.funny/method_channel'</span>);</span><br><span class="line"><span class="keyword">void</span> _popToNative() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="comment">// 这里的'backToNative'对应iOS部分的 call.method</span></span><br><span class="line">    <span class="keyword">await</span> methodChannel.invokeMethod(<span class="string">'backToNative'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> _updateFlutter() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="keyword">dynamic</span>&gt; map = &#123;<span class="string">"title"</span>: <span class="string">"更新标题"</span>&#125;;</span><br><span class="line">    <span class="comment">// 这里的map 对应iOS部分的 call.arguments</span></span><br><span class="line">    <span class="built_in">String</span> result = <span class="keyword">await</span> methodChannel.invokeMethod(<span class="string">'updateFlutter'</span>, map);</span><br><span class="line">    setState(() &#123;</span><br><span class="line">        buttonTitle = result;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、通过FlutterEventChannel，iOS主动给Flutter发送消息</li>
+</ul>
+<p>iOS对应的代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先要遵守&lt;FlutterStreamHandler&gt;协议</span></span><br><span class="line"><span class="built_in">NSString</span> *eventName = <span class="string">@"com.pages.your/native_post"</span>;</span><br><span class="line">FlutterEventChannel *evenChannal = [FlutterEventChannel eventChannelWithName:eventName binaryMessenger:flutterVC];</span><br><span class="line">[evenChannal setStreamHandler:<span class="keyword">self</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// FlutterStreamHandler Method</span></span><br><span class="line">- (FlutterError *)onListenWithArguments:(<span class="keyword">id</span>)arguments eventSink:(FlutterEventSink)events &#123;</span><br><span class="line">    <span class="comment">// arguments flutter给native的参数</span></span><br><span class="line">    <span class="keyword">if</span> ([arguments isEqualToString:<span class="string">@"123456"</span>]) &#123;</span><br><span class="line">        <span class="comment">// 可以将events保存为全局变量，在任何需要的时候通过events();给flutter发送消息</span></span><br><span class="line">        events(<span class="string">@"native传值给flutter"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (FlutterError * _Nullable)onCancelWithArguments:(<span class="keyword">id</span> _Nullable)arguments &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Flutter部分相关代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> EventChannel eventChannel = <span class="keyword">const</span> EventChannel(<span class="string">'com.pages.your/native_post'</span>);</span><br><span class="line"><span class="meta">@override</span></span><br><span class="line"><span class="keyword">void</span> initState() &#123;</span><br><span class="line">	<span class="keyword">super</span>.initState();</span><br><span class="line">	<span class="comment">// 注册监听事件，同时发送参数12345</span></span><br><span class="line">	eventChannel.receiveBroadcastStream(<span class="string">'123456'</span>).listen(_onEvent);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 回调事件</span></span><br><span class="line"><span class="keyword">void</span> _onEvent(<span class="built_in">Object</span> event) &#123;</span><br><span class="line">    <span class="comment">// 这里的event就是iOS通过events(xxx)传递过来的参数</span></span><br><span class="line">    Future.delayed(<span class="built_in">Duration</span>(seconds: <span class="number">2</span>), () &#123;</span><br><span class="line">        setState(() &#123;</span><br><span class="line">            nativeValue = event.toString();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/05/Widget基础篇/" rel="next" title="Widget基础篇">
+                <i class="fa fa-chevron-left"></i> Widget基础篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Funny">
+            
+              <p class="site-author-name" itemprop="name">Funny</p>
+              <p class="site-description motion-element" itemprop="description">Talk is cheap, show you the code.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、现有工程接入Flutter"><span class="nav-text">一、现有工程接入Flutter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、iOS和Flutter交互"><span class="nav-text">二、iOS和Flutter交互</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Funny</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
