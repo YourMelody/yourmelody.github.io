@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Mess">
+<meta name="description" content="第一章：熟悉Objective-C第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Messaging(Objec">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编写高质量Objective-C代码（一）">
+<meta property="og:title" content="编写高质量iOS代码的52个有效方法读书笔记">
 <meta property="og:url" content="http://yoursite.com/2018/11/19/编写高质量Objective-C代码（一）/index.html">
 <meta property="og:site_name" content="Funny的学习笔记">
-<meta property="og:description" content="第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Mess">
+<meta property="og:description" content="第一章：熟悉Objective-C第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Messaging(Objec">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-02T13:23:11.000Z">
+<meta property="og:updated_time" content="2019-02-01T09:28:31.052Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编写高质量Objective-C代码（一）">
-<meta name="twitter:description" content="第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Mess">
+<meta name="twitter:title" content="编写高质量iOS代码的52个有效方法读书笔记">
+<meta name="twitter:description" content="第一章：熟悉Objective-C第1条:了解Objective-C语言的起源Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样： 1234567// Messaging(Objec">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>编写高质量Objective-C代码（一） | Funny的学习笔记</title>
+  <title>编写高质量iOS代码的52个有效方法读书笔记 | Funny的学习笔记</title>
   
 
 
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">编写高质量Objective-C代码（一）</h1>
+          <h1 class="post-title" itemprop="name headline">编写高质量iOS代码的52个有效方法读书笔记</h1>
         
 
         <div class="post-meta">
@@ -305,11 +305,18 @@
       
 
       
-        <h2 id="第1条-了解Objective-C语言的起源"><a href="#第1条-了解Objective-C语言的起源" class="headerlink" title="第1条:了解Objective-C语言的起源"></a>第1条:了解Objective-C语言的起源</h2><p>Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。它由Smalltalk演化而来，后者是消息型语言的鼻祖。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Messaging(Objective-C)</span></span><br><span class="line">Object *obj = [Object new];</span><br><span class="line">[obj performWith:parameter1 and:parameter2];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Function calling(C++)</span></span><br><span class="line">Object *obj = new Object;</span><br><span class="line">obj-&gt;perform(parameter1, parameter2);</span><br></pre></td></tr></table></figure>
-<p>分配在堆中的内存必须直接管理，而分配的栈上的用于保存变量的内存则会在其栈帧弹出时自动清理。Objective-C将堆内存管理抽象出来，不需要用malloc及free来分配或释放对象所占内存。它在运行期环境把这部分工作抽象为一套内存管理架构，叫做“引用计数”。</p>
+        <h1 id="第一章：熟悉Objective-C"><a href="#第一章：熟悉Objective-C" class="headerlink" title="第一章：熟悉Objective-C"></a>第一章：熟悉Objective-C</h1><h3 id="第1条-了解Objective-C语言的起源"><a href="#第1条-了解Objective-C语言的起源" class="headerlink" title="第1条:了解Objective-C语言的起源"></a>第1条:了解Objective-C语言的起源</h3><p>Objective-C使用“消息结构”(messaging structure)而非“函数调用”(function calling)。使用消息结构的语言，其运行时所应执行的代码由运行环境决定；而使用函数调用的语言，则在编译期决定。消息与函数调用之间的区别看上去就像这样：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Messaging(Objective-C)</span></span><br><span class="line">Object *obj = [Object new];</span><br><span class="line">[obj performWith:parameter1 and:parameter2];</span><br><span class="line">	</span><br><span class="line"><span class="comment">// Function calling(C++)</span></span><br><span class="line">Object *obj = new Object;</span><br><span class="line">obj-&gt;perform(parameter1, parameter2);</span><br></pre></td></tr></table></figure>
+<p>关键区别在于：使用消息结构的语言，其运行时所应执行的代码由运行环境决定；使用函数调用的语言，则由编译器决定。Objective-C的重要工作都由“运行期组件”来完成。使用Objective-C的面相对象特性所需的全部数据结构及函数都在运行期组件里面。运行期组件本质上就是一种与开发者所编代码相链接的“动态库”，其代码能把开发者编写的所有程序粘合起来。</p>
+<p>Objective-C中的指针是用来指示对象的。想要声明一个变量，令其指代某个对象，可用如下语法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *str = <span class="string">@"The string"</span>;</span><br></pre></td></tr></table></figure>
+<p>对象所占内存总是分配在“堆空间”中，绝不会分配在“栈”上。分配在堆中的内存必须直接管理，而分配的栈上的用于保存变量的内存则会在其栈帧弹出时自动清理。</p>
+<p>本节要点：</p>
+<ul>
+<li>Objective-C为C语言添加了面向对象特性，是其超集。Objective-C使用动态绑定的消息结构，在寻形式才会检查对象类型。接收一条消息后，究竟执行何种代码，由运行期环境决定。</li>
+</ul>
 <a id="more"></a>
-<h2 id="第2条：在类的头文件中尽量少引入其他头文件"><a href="#第2条：在类的头文件中尽量少引入其他头文件" class="headerlink" title="第2条：在类的头文件中尽量少引入其他头文件"></a>第2条：在类的头文件中尽量少引入其他头文件</h2>
+<h3 id="第2条：在类的头文件中尽量少引入其他头文件"><a href="#第2条：在类的头文件中尽量少引入其他头文件" class="headerlink" title="第2条：在类的头文件中尽量少引入其他头文件"></a>第2条：在类的头文件中尽量少引入其他头文件</h3>
       
     </div>
     
@@ -472,7 +479,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1条-了解Objective-C语言的起源"><span class="nav-text">第1条:了解Objective-C语言的起源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2条：在类的头文件中尽量少引入其他头文件"><span class="nav-text">第2条：在类的头文件中尽量少引入其他头文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章：熟悉Objective-C"><span class="nav-text">第一章：熟悉Objective-C</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第1条-了解Objective-C语言的起源"><span class="nav-text">第1条:了解Objective-C语言的起源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2条：在类的头文件中尽量少引入其他头文件"><span class="nav-text">第2条：在类的头文件中尽量少引入其他头文件</span></a></li></ol></li></ol></div>
             
 
           </div>
